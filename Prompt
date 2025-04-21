@@ -1,0 +1,77 @@
+I am using STM32F407VG microcontroller with STM32CubeIDE. I have already generated the project using STM32CubeMX. I want you to write the code only inside the /* USER CODE BEGIN */ ... /* USER CODE END */ sections. The format is as follows:
+
+/* USER CODE BEGIN PV */
+/* USER CODE END PV */
+/* USER CODE BEGIN 0 */
+/* USER CODE END 0 */
+/* USER CODE BEGIN 1 */
+/* USER CODE END 1 */
+/* USER CODE BEGIN 2 */
+/* USER CODE END 2 */
+while (1)
+{
+    
+}
+/* USER CODE END WHILE */
+/* USER CODE BEGIN 3 */
+/* USER CODE END 3 */
+/* USER CODE BEGIN 4 */
+/* USER CODE END 4 */
+
+You must only use the following STM32 HAL functions in your code:
+
+HAL_TIM_Base_Start_IT
+
+HAL_TIM_PeriodElapsedCallback
+
+HAL_GPIO_TogglePin
+
+HAL_GPIO_EXTI_Callback
+
+HAL_GPIO_EXTI_IRQHandler
+
+HAL_TIM_PWM_Start
+
+TIMx->CCR1 = dutycycle;
+
+HAL_TIM_OC_Start
+
+HAL_TIM_OC_DelayElapsedCallback
+
+HAL_TIM_ReadCapturedValue
+
+__HAL_TIM_SET_COMPARE
+
+HAL_TIM_IC_Start_IT
+
+__HAL_TIM_GetCounter
+
+HAL_TIM_IC_CaptureCallback
+
+HAL_ADC_Start
+
+HAL_RTC_AlarmAEventCallback
+
+RTC_DateTypeDef / RTC_TimeTypeDef
+
+HAL_GPIO_WritePin
+
+HAL_IWDG_Refresh
+
+HAL_UART_Transmit
+
+HAL_UART_Receive
+
+HAL_UART_Receive_IT
+
+HAL_UART_RxCpltCallback
+
+HAL_SPI_Transmit
+
+HAL_SPI_Receive
+
+
+Do not write any GPIO, Clock, or Timer initialization code, as that is already handled in the generated project. Write only the application logic, like toggling LEDs, using interrupts, or reading UART data, etc., using only the above HAL functions. Keep your code inside the specified comment sections.
+
+Now generate a program for the following task:
+[Your task goes here]
