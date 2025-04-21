@@ -1,0 +1,57 @@
+/* USER CODE BEGIN PV */
+uint8_t accel_data[6];  // Assuming 3-axis, 2 bytes each
+uint8_t x_value, y_value;
+uint8_t logging_enabled = 1;
+uint8_t uart_buffer[50];
+/* USER CODE END PV */
+
+/* USER CODE BEGIN 0 */
+void read_accelerometer(void)
+{
+    // Read 6 bytes from accelerometer (X, Y, Z)
+    HAL_SPI_Receive(&hspi1, accel_data, 6, 50);
+    x_value = accel_data[0];  // X-axis (LSB)
+    y_value = accel_data[2];  // Y-axis (LSB)
+}
+
+void print_xy_uart(void)
+{
+    sprintf((char *)uart_buffer, "X: %d, Y: %d\r\n", x_value, y_value);
+    HAL_UART_Transmit(&huart5, uart_buffer, strlen((char *)uart_buffer), 10);
+}
+/* USER CODE END 0 */
+
+/* USER CODE BEGIN 1 */
+/* USER CODE END 1 */
+
+/* USER CODE BEGIN 2 */
+HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_RESET); // Optional LED setup
+/* USER CODE END 2 */
+
+while (1)
+{
+    if (logging_enabled)
+    {
+        read_accelerometer();
+        print_xy_uart();
+        HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12); // LED blink to show it's logging
+        HAL_Delay(500);
+    }
+}
+/* USER CODE END WHILE */
+
+/* USER CODE BEGIN 3 */
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+    if (GPIO_Pin == GPIO_PIN_0) // Button on PA0
+    {
+        logging_enabled = 0; // Stop logging
+        char msg[] = "Stop Logging\r\n";
+        HAL_UART_Transmit(&huart5, (uint8_t *)msg, strlen(msg), 10);
+        HAL_GPIO_WritePin(GPIOD, GPIO_PIN_12, GPIO_PIN_RESET); // Turn off LED
+    }
+}
+/* USER CODE END 3 */
+
+/* USER CODE BEGIN 4 */
+/* USER CODE END 4 */
