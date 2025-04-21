@@ -1,0 +1,84 @@
+HAL_TIM_Base_Start_IT(&htim2);  
+// Starts TIM2 base timer in interrupt mode. Generates interrupt when the timer overflows.
+
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)  
+// This is the callback function that executes when a timer overflow interrupt occurs.
+
+HAL_GPIO_TogglePin(GPIOD, GPIO_PIN_12);  
+// Toggles the state of pin PD12 (e.g., switches LED ON/OFF).
+
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)  
+// This callback is called when an external interrupt is triggered on a GPIO pin.
+
+void HAL_GPIO_EXTI_IRQHandler(uint16_t GPIO_Pin);  
+// Handles the interrupt request from the EXTI line corresponding to the GPIO pin.
+
+HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1);  
+// Starts PWM signal generation on TIM4, Channel 1.
+
+htim4.Instance->CCR1 = dutycycle;  
+// Sets the duty cycle of PWM on TIM4 Channel 1 by changing the compare value.
+
+HAL_TIM_OC_Start(&htim4, TIM_CHANNEL_1);  
+// Starts output compare mode on TIM4 Channel 1.
+
+void HAL_TIM_OC_DelayElapsedCallback(TIM_HandleTypeDef *htim);  
+// Callback function that gets called when the output compare match occurs (used for delay/toggle/timing control).
+
+if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)  
+// Checks if the interrupt or event is triggered by TIM Channel 1.
+
+HAL_TIM_ReadCapturedValue(htim, TIM_CHANNEL_1);  
+// Reads the value captured in the input capture register of TIM Channel 1.
+
+__HAL_TIM_SET_COMPARE(htim, TIM_CHANNEL_1, ccr_content + pulse1_value);  
+// Updates the compare value to control the output (e.g., next edge timing).
+
+HAL_TIM_IC_Start_IT(&htim2, TIM_CHANNEL_1);  
+// Starts input capture with interrupt on TIM2 Channel 1.
+
+__HAL_TIM_GetCounter(&htim2);  
+// Returns the current counter value of TIM2.
+
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim);  
+// Callback function called when input capture event occurs on a timer channel.
+
+__HAL_TIM_GetCounter(htim);  
+// Gets the current counter value of the timer.
+
+HAL_ADC_Start(&hadc1);  
+// Starts the ADC conversion on ADC1.
+
+void HAL_RTC_AlarmAEventCallback(RTC_HandleTypeDef *hrtc);  
+// Callback function that is called when RTC Alarm A triggers.
+
+RTC_DateTypeDef sdatestructureget;  
+RTC_TimeTypeDef stimestructureget;  
+// Structures used to store and access the current date and time from the RTC.
+
+HAL_GPIO_WritePin(GPIOD, GPIO_PIN_14, SET);  
+// Sets PD14 to HIGH level (logic 1).
+
+HAL_IWDG_Refresh(&hiwdg);  
+// Refreshes the Independent Watchdog Timer to prevent a system reset.
+
+HAL_UART_Transmit(&huart4, (uint8_t *)tx, strlen(tx), 10);  
+// Sends data via UART4 (blocking mode), here `tx` is the data buffer.
+
+HAL_UART_Receive(&huart4, (uint8_t *)tx, 1, 10);  
+// Receives one byte of data via UART4 (blocking mode).
+
+HAL_UART_Receive_IT(&huart4, (uint8_t *)&rx, 1);  
+// Enables UART4 receive interrupt for 1 byte of data (non-blocking).
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart);  
+// Callback function that gets called when UART receive (Rx) completes in interrupt mode.
+
+HAL_UART_Transmit(&huart4, (uint8_t *)&rx, 1, 10);  
+// Transmits 1 byte via UART4 (e.g., echo received byte).
+
+HAL_SPI_Transmit(&hspi1, TxBuf, 1, 50);  
+// Transmits 1 byte of data over SPI1 using buffer `TxBuf`.
+
+HAL_SPI_Receive(&hspi1, Return, 1, 50);  
+// Receives 1 byte of data from SPI1 and stores it in `Return`.
